@@ -11,6 +11,13 @@ from flask_login import (
     logout_user,
 )
 
+from flask import render_template
+from flask_wtf import FlaskForm
+
+
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
+
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 
@@ -46,9 +53,9 @@ def load_user(user_id):
 @app.route("/")
 def index():
     if current_user.is_authenticated:
-        return(
+        return( # This is where the html for the form will go
             "<p>Hello, {}! You're logged in! Email: {}</p>"
-            "<div><p>Google Profile Picture:</p>"
+            "<div>"
             '<img src="{}" alt="Google profile pic"></img></div>'
             '<a class="button" href="/logout">Logout</a>'.format(
                 current_user.name, current_user.email, current_user.profile_pic
@@ -123,6 +130,24 @@ def callback():
 
     # Send user back to homepage
     return redirect(url_for("index"))
+
+
+
+class LoginForm(FlaskForm):
+    condition = StringField('condition', validators=[DataRequired()])
+    #Add more conditions
+    submit = SubmitField('Submit')
+
+@app.route('/form', methods=['GET', 'POST'])
+@login_required
+def symptomForm():
+    form = LoginForm()
+    if form.validate_on_submit():
+        #send data to the db
+        return redirect('/loading')
+    return render_template('some.html', form=form)
+
+
 
 @app.route("/logout")
 @login_required
