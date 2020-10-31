@@ -45,9 +45,9 @@ except sqlite3.OperationalError:
     pass
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
-database_client = MongoClient("mongodb+srv://austinhx:ambusher922@medicaldb.scqt4.mongodb.net/MedicalDB?retryWrites=true&w=majority")
+database_client = MongoClient("mongodb+srv://austinhx:helloworld@medicaldb.scqt4.mongodb.net/MedicalDB?retryWrites=true&w=majority")
 #os.environ.get("MONGO_CLIENT", None))
-database = database_client.Users
+database = database_client.User
 user_database = database.user_info
 
 print(user_database)
@@ -130,24 +130,25 @@ def callback():
     user = User(
         id_=unique_id, name=users_name, email=users_email, profile_pic=picture
     )
-    userdict = {
-            "unique_id": unique_id,
-            "users_name": users_name,
-            "users_email": users_email,
-            "users_picture": picture,
-        }
-    try:
+    if not user_database.find_one({"users_email": users_email}):
+        userdict = {
+                "unique_id": unique_id,
+                "users_name": users_name,
+                "users_email": users_email,
+                "users_picture": picture,
+                "history": [],
+            }
+    
         print("Adding to DB...")
         #This is giving us an error
         user_database.insert_one(userdict)
-    except:
-        print("Error")
+
     # Doesn't exist? Add it to the database.
     if not User.get(unique_id):
         User.create(unique_id, users_name, users_email, picture)
         print(users_email + " was added to the db!")
         
-    pprint.pprint(user_database.find_one())
+    #pprint.pprint(user_database.find_one())
     
 
 
