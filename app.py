@@ -55,8 +55,11 @@ def load_user(user_id):
     print(user_id)
     return User.get(user_id)
     
-
 @app.route("/")
+def landing():
+    return render_template('index.html')
+
+@app.route("/dashboard")
 def index():
     if current_user.is_authenticated:
         return render_template('dashboard.html')

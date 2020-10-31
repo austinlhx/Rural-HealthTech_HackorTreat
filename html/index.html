@@ -10,26 +10,26 @@
     <title>Rural Health Care</title>
 
     <!-- Fav icon -->
-    <link href="../assets/images/logo/favicon.png" rel="shortcut icon">
+    <link href="{{ url_for('static', filename='images/logo/favicon.png') }}" rel="shortcut icon">
     <!-- Font Family-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <!--bootstrap css-->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <!-- color css -->
-    <link href="../assets/css/color-6.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/color-6.css') }}" rel="stylesheet" type="text/css">
     <!--owl carousel css-->
-    <link href="../assets/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="../assets/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}" rel="stylesheet">
     <!-- Icons -->
-    <link href="../assets/css/fontawesome.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/themify.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/fontawesome.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/themify.css') }}" rel="stylesheet" type="text/css">
 
     <!-- AOS css-->
-    <link href="../assets/css/aos.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/aos.css') }}" rel="stylesheet" type="text/css">
     <!-- flat Icons -->
-    <link href="../assets/css/flaticon.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/flaticon.css') }}" rel="stylesheet" type="text/css">
     <!--magnific popup css-->
-    <link href="../assets/css/magnific-popup.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/magnific-popup.css') }}" rel="stylesheet">
 </head>
 <body data-offset="50" data-spy="scroll" data-target=".navbar" >
 <!--loader start-->
@@ -55,7 +55,7 @@
             <div class="col">
                 <nav>
                     <a class="logo-light m-r-auto" href="index.html"><img alt=""
-                                                                                  class="img-fluid" src="../assets/images/logo/9.png"></a>
+                                                                                  class="img-fluid" src="{{ url_for('static', filename='images/logo/9.png') }}"></a>
                     <div class="responsive-btn">
                         <a class="toggle-nav" href="#"><i aria-hidden="false" class="fa fa-bars text-white"></i></a>
                     </div>
@@ -105,7 +105,7 @@
                                         <a class=" btn btn-default btn-gradient" href="signup.html">Sign Up</a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-default btn-gradient text-white active" href="login.html">Login</a>
+                                        <a class="btn btn-default btn-gradient text-white active" href="/login">Login</a>
                                     </li>
                                 </ul>
                             </div>
@@ -117,7 +117,7 @@
     </div>
     <div class="set-abs abs-horizon-center girl-boy">
         <img alt="" class="img-fluid" data-tilt data-tilt-max="5" data-tilt-perspective="500"
-             data-tilt-speed="400" src="../assets/images/ruralh.jpg">
+             data-tilt-speed="400" src="{{ url_for('static', filename='images/agency/slider/img.png') }}">
         <div class="plus-container plus-container6">
             <div class="plus white">
             </div>
@@ -814,7 +814,7 @@
                         <h3 class="text-white">About Us</h3>
                     </div>
                     <div class="footer-contant">
-                        <img alt="" class="img-fluid footer-logo" src="../assets/images/logo/hwarrior.JPG">
+                        <img alt="" class="img-fluid footer-logo" src="../assets/images/logo/1.png">
                         <div class="footer-para">
                             <h6 class="text-white para-address">Unive</h6>
                             <h6 class="text-white para-address">324 Madison Street New york City, </h6>
@@ -918,40 +918,43 @@
 <!-- Tap on Ends-->
 
 <!-- latest jquery-->
-<script src="../assets/js/jquery-3.3.1.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
 
 <!-- popper js-->
-<script src="../assets/js/popper.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 
 <!-- Bootstrap js-->
-<script src="../assets/js/bootstrap.js"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 
 <!--  costamizer option -->
-<script src="../assets/js/custamizer-option.js"></script>
+<script src="{{ url_for('static', filename='js/custamizer-option.js') }}"></script>
 
 <!--owl js-->
-<script src="../assets/js/owl.carousel.min.js"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
 
 <!-- AOS JS -->
-<script src="../assets/js/aos.js"></script>
+
+<script src="{{ url_for('static', filename='js/aos.js') }}"></script>
 
 <!-- tilt JS -->
-<script src="../assets/js/vanilla-tilt.min.js"></script>
+<script src="{{ url_for('static', filename='js/vanilla-tilt.min.js') }}"></script>
 
 <!-- counter js-->
-<script src="../assets/js/jquery.counterup.min.js"></script>
-<script src="../assets/js/jquery.waypoints.min.js"></script>
+<script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
 
 <!--magnific popup js-->
-<script src="../assets/js/magnific-popup.js"></script>
+<script src="{{ url_for('static', filename='js/magnific-popup.js') }}"></script>
 
 
 
 <!-- common js-->
-<script src="../assets/js/main.js"></script>
-<script src="../assets/js/aos-init.js"></script>
-<script src="../assets/js/video-popup.js"></script>
-<script src="../assets/js/script6.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/aos-init.js') }}"></script>
+<script src="{{ url_for('static', filename='js/video-popup.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script6.js') }}"></script>
 
 </body>
 </html>
