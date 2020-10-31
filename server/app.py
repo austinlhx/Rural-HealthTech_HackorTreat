@@ -1,6 +1,5 @@
 import json
 import os
-import sqlite3
 import pprint
 
 from pymongo import MongoClient
@@ -13,7 +12,7 @@ from flask_login import (
     login_user,
     logout_user,
 )
-
+from flask_login import UserMixin
 from flask import render_template
 from flask_wtf import FlaskForm
 
@@ -24,8 +23,7 @@ from wtforms.validators import DataRequired
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 
-from db import init_db_command
-from user import User
+
 
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
@@ -38,11 +36,6 @@ app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-try:
-    init_db_command()
-except sqlite3.OperationalError:
-    pass
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 database_client = MongoClient("mongodb+srv://austinhx:helloworld@medicaldb.scqt4.mongodb.net/MedicalDB?retryWrites=true&w=majority")
@@ -59,7 +52,9 @@ def get_google_provider_cfg():
 
 @login_manager.user_loader
 def load_user(user_id):
+    print(user_id)
     return User.get(user_id)
+    
 
 @app.route("/")
 def index():
@@ -86,6 +81,41 @@ def login():
     )
     return redirect(request_uri)
 
+
+class User(UserMixin):
+    def __init__(self, id_, name, email, profile_pic):
+        self.id = id_
+        self.name = name
+        self.email = email
+        self.profile_pic = profile_pic
+
+    @staticmethod
+    def get(user_id):
+        #user_id = unique_id
+        print(user_id)
+        try:
+            user = user_database.find_one({'unique_id': user_id})
+            print(user)
+            user = User(
+                id_=user['unique_id'], name=user['users_name'], email=user['users_email'], profile_pic=user['users_picture']
+            )
+        
+            return user
+        except:
+            return None
+
+    @staticmethod
+    def create(id_, name, email, profile_pic):
+        userdict = {
+                "unique_id": id_,
+                "users_name": name,
+                "users_email": email,
+                "users_picture": profile_pic,
+                "history": [],
+            }
+        user_database.insert_one(userdict)
+    
+    
 @app.route("/login/callback")
 def callback():
     code = request.args.get("code")
@@ -130,18 +160,6 @@ def callback():
     user = User(
         id_=unique_id, name=users_name, email=users_email, profile_pic=picture
     )
-    if not user_database.find_one({"users_email": users_email}):
-        userdict = {
-                "unique_id": unique_id,
-                "users_name": users_name,
-                "users_email": users_email,
-                "users_picture": picture,
-                "history": [],
-            }
-    
-        print("Adding to DB...")
-        #This is giving us an error
-        user_database.insert_one(userdict)
 
     # Doesn't exist? Add it to the database.
     if not User.get(unique_id):
