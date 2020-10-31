@@ -1,6 +1,9 @@
 import json
 import os
 import sqlite3
+import pprint
+
+from pymongo import MongoClient
 
 from flask import Flask, redirect, request, url_for
 from flask_login import (
@@ -42,6 +45,14 @@ except sqlite3.OperationalError:
     pass
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
+database_client = MongoClient("mongodb+srv://austinhx:ambusher922@medicaldb.scqt4.mongodb.net/MedicalDB?retryWrites=true&w=majority")
+#os.environ.get("MONGO_CLIENT", None))
+database = database_client.Users
+user_database = database.user_info
+
+print(user_database)
+
+#collection = database.test_collection
 
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
@@ -119,11 +130,27 @@ def callback():
     user = User(
         id_=unique_id, name=users_name, email=users_email, profile_pic=picture
     )
-
+    userdict = {
+            "unique_id": unique_id,
+            "users_name": users_name,
+            "users_email": users_email,
+            "users_picture": picture,
+        }
+    try:
+        print("Adding to DB...")
+        #This is giving us an error
+        user_database.insert_one(userdict)
+    except:
+        print("Error")
     # Doesn't exist? Add it to the database.
     if not User.get(unique_id):
         User.create(unique_id, users_name, users_email, picture)
         print(users_email + " was added to the db!")
+        
+    pprint.pprint(user_database.find_one())
+    
+
+
 
     # Begin user session by logging the user in
     login_user(user)
