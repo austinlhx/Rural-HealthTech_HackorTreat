@@ -15,6 +15,7 @@ from flask_login import (
 from flask_login import UserMixin
 from flask import render_template
 from flask_wtf import FlaskForm
+from radar import RadarClient
 
 
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
@@ -27,10 +28,12 @@ import requests
 
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+RADAR_SECRET_KEY = os.environ.get("RADAR_SECRET_KEY", None)
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 
+radar = RadarClient(RADAR_SECRET_KEY)
 app = Flask(__name__, template_folder='html')
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
@@ -42,8 +45,9 @@ database_client = MongoClient("mongodb+srv://austinhx:helloworld@medicaldb.scqt4
 #os.environ.get("MONGO_CLIENT", None))
 database = database_client.User
 user_database = database.user_info
+doctor_database = database.doctor_info
 
-print(user_database)
+
 
 #collection = database.test_collection
 
@@ -52,17 +56,18 @@ def get_google_provider_cfg():
 
 @login_manager.user_loader
 def load_user(user_id):
-    print(user_id)
     return User.get(user_id)
     
 @app.route("/")
 def landing():
     return render_template('index.html')
 
-@app.route("/dashboard")
+@app.route("/dashboard", methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
-        return render_template('dashboard.html')
+        user_info = user_database.find_one({'unique_id': current_user.id})
+        user_history = user_info['history'] 
+        return render_template('dashboard.html', user=current_user.name, history=user_history)
         #return( 
             # This is where the html for the form will go
             #"<p>Hello, {}! You're logged in! Email: {}</p>"
@@ -73,7 +78,7 @@ def index():
             #)
         #)
     else:
-        return render_template('login.html')
+        return render_template('index.html')
 
 @app.route("/login")
 def login():
@@ -97,10 +102,8 @@ class User(UserMixin):
     @staticmethod
     def get(user_id):
         #user_id = unique_id
-        print(user_id)
         try:
             user = user_database.find_one({'unique_id': user_id})
-            print(user)
             user = User(
                 id_=user['unique_id'], name=user['users_name'], email=user['users_email'], profile_pic=user['users_picture']
             )
@@ -180,20 +183,46 @@ def callback():
 
 
 class LoginForm(FlaskForm):
-    condition = StringField('condition', validators=[DataRequired()])
+    name = StringField('Name', [DataRequired()])
     #Add more conditions
     submit = SubmitField('Submit')
 
 @app.route('/form', methods=['GET', 'POST'])
 @login_required
 def symptomForm():
+    
     form = LoginForm()
-    if form.validate_on_submit():
+    
+    
+    if request.method == 'POST' and form.submit():
+
+        print(form.name.data)
+        print(request.remote_addr)
+        print(current_user.id)
+        query = {"unique_id": current_user.id}
+        #this updates our history
+        value = {"$push": {"history" : form.name.data}}
+        user_database.update_one(query, value)
         #send data to the db
-        return redirect('/loading')
-    return render_template('some.html', form=form)
+        #Apply ML model here
+        #send back nearest doctors within a certain radius, 
+        #user_ip = request.remote_addr
+        #ip_location = radar.geocode.ip(ip=user_ip)
+        ip_location = ('40.7832', '73.9700')
+        all_doctors = doctor_database.find({})
+        for doctor in all_doctors:
+            longitude = doctor['longitude']
+            latitude = doctor['latitude']
+            location = (latitude, longitude)
+            print(location)
+            routes = radar.route.distance(ip_location, location, modes="foot")
+            print(routes.foot)
 
 
+        return redirect('/dashboard')
+    
+    return render_template('form.html', form=form)
+#longitude:73.9700, latitude: 40.7832
 
 @app.route("/logout")
 @login_required

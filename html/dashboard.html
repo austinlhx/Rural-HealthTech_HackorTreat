@@ -1,1 +1,342 @@
-<p>Dashboard goes here</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Unice" name="description">
+    <meta content="Unice" name="keywords">
+    <meta content="Unice" name="author">
+
+    <title>Health Warrior</title>
+
+    <!-- Fav icon -->
+    <link href="{{ url_for('static', filename='images/logo/favicon.png') }}" rel="shortcut icon">
+    <!-- Font Family-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <!--bootstrap css-->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+    <!-- color css -->
+    <link href="{{ url_for('static', filename='css/inner-page.css') }}" rel="stylesheet" type="text/css">
+    <!--owl carousel css-->
+    <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="{{ url_for('static', filename='css/fontawesome.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/themify.css') }}" rel="stylesheet" type="text/css">
+
+    <!--magnific popup css-->
+    <link href="{{ url_for('static', filename='css/magnific-popup.css') }}" rel="stylesheet">
+</head>
+<body class="agency" data-offset="50" data-spy="scroll" data-target=".navbar">
+<!--loader start-->
+<div class="loader-wrapper">
+    <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!--loader end-->
+
+<!--megamenu section Start-->
+<header class="dark loding-header custom-scroll">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                 <nav>
+                    <a class="logo-light m-r-auto" href="index.html"><img alt=""
+                                                                                  class="img-fluid" src="../assets/images/logo/hwarrior.JPG" style = "width: 13%; margin-top: 10px; margin-left: 2%; border-bottom: 3px #241E86 solid; border-top: 3px #241E86 solid"></a>
+                    <div class="responsive-btn">
+                        <a class="toggle-nav" href="#"><i aria-hidden="false" class="fa fa-bars text-white"></i></a>
+                    </div>
+                    
+                        <div class="responsive-btn"><h5 class="btn-back">back</h5></div>
+                        <ul class="main-menu">
+                            <li><a href="index.html">Home</a></li>
+                                          
+                            <li><a href="about-us.html">Dashboard </a></li>
+
+                            <li><a href="team.html">Team</a></li>
+
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="/logout">Log Out</a></li>
+                        </ul>
+                   
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!--megamenu section end-->
+
+<!--breadcrumb section start-->
+<section class="agency breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="breadcrumb-text text-center">Hello {{user}}!</h2>
+                <h2 class="breadcrumb-text text-center">Your Dashboard</h2>
+                <p class="breadcrumb-text text-center" style = "font-size: large"> Find your medical history or search for a new diagnosis. </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--breadcrumb section end-->
+
+<!-- about section Start-->
+<section class="gym format">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="center-text">
+                    <div class="text-center">
+                        <div class="format-head-text">
+                            <h3 class="about-font-header gradient-text">Start New Search</h3>
+                        </div>
+                        <div class="format-sub-text mb-0">
+                            <p class="p-light about-para">
+                                To start a new search, select the button below and enter your symptom information. We will automatically enter your search into your medical log so you can go back and reference it at any time to track your history.
+                            </p>
+                            <a class="btn btn-default btn-gradient text-white active" href="login.html">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about section end-->
+
+<!--accordion1 section start-->
+<section class="saas1 faq testimonial-bg" style = "margin-top: -10%">
+    <div class="container">
+        <div class="row">
+                              
+            <section class="event schedule set-relative" id="schedule">
+                <div class="container">
+                    <div class="row">
+                           <div class="col-12">
+                            <div class="cal-time">
+                                <div class="time">
+                                    <h4 class="text-capitalize monday-text">Medical Search History</h4>
+                                </div>
+                            </div>
+                            <div class="event-container scrollbar">
+                                <div>
+                                    <div class=" cal-time events">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="schedule-event">
+                                                    <h5 class="names">Health Warrior Diagnosis: Common Cold</h5>
+                                                    
+                                                    <p class="schedule-description" style = "color: #577689">The symptoms you indicated were <span style = "font-style: italic"> runny nose, sneezing, phlegm, and headache. </span></p>
+                                                    <p class="schedule-description"> This condition can be self-treated. </p> <p class="schedule-description">If you feel the need to visit a professional, we recommended <span style = "font-weight: bold">Bob Smith | General Practicioner </span></p>
+                                                    <p class="schedule-description" style = "font-size: medium"> Oct. 30 </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" cal-time events">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="schedule-event">
+                                                    <h5 class="names">DIAGNOSIS</h5>
+                                                    
+                                                    <p class="schedule-description">Your next search will be recorded here. Your logs include the symptoms you indicated, our diagnosis, and contact information for a relevant health professional. </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="timing">
+                                                    <h5 class="event-time center-content">Form</h5>
+                                                    <div class="border-container">
+                                                        <div class="border-dashed"></div>
+                                                    </div>
+                                                    <h5 class="event-time center-content">Diagnosis</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+
+
+<!--
+            <div class="col-md-8">
+                <div class="faq-block">
+                    <div class="w-100">
+                        <div class="accordion faq m-0" id="accordionExample11">
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed p-t-0" data-target="#collapse11"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse show" data-parent="#accordionExample11" id="collapse11">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed" data-target="#collapse22"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse" data-parent="#accordionExample11" id="collapse22">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed" data-target="#collapse33"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse" data-parent="#accordionExample11" id="collapse33">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed" data-target="#collapse44"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse" data-parent="#accordionExample11" id="collapse44">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed" data-target="#collapse55"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse" data-parent="#accordionExample11" id="collapse55">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed" data-target="#collapse66"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse" data-parent="#accordionExample11" id="collapse66">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div aria-expanded="false" class="card-header collapsed" data-target="#collapse77"
+                                     data-toggle="collapse" role="heading">
+                                    <a>
+                                        <div class="fa fa-angle-right rotate"></div>
+                                    </a>Do I need to make a payment?
+                                </div>
+                                <div class="collapse" data-parent="#accordionExample11" id="collapse77">
+                                    <div class="card-body">
+                                        No one cares about products. People care about ideas. Is a product an idea?
+                                        Noup. Is a brand? A good one is. No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.No one cares about products. People care about
+                                        ideas. Is a product an idea? Noup.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="faq-img-block">
+                    <img alt="faq-person" class="img-fluid" src="../assets/images/saas1/faq-img.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<!--accordion1 section end-->
+
+
+
+
+
+<footer class="agency footer2 p-b-0" style = "width: 100%; margin-top: -3%; margin-bottom: -10%">
+
+    <p style = "color: white; text-align: center; margin-top: -2%"> Catherine, Harshita, Austin, & Shunya</p>
+
+</footer>   
+<!-- Tap on Top-->
+<div class="tap-top">
+    <div><i class="fa fa-angle-double-up"></i></div>
+</div>
+<!-- Tap on Ends-->
+
+<!-- latest jquery-->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<!-- popper js-->
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- Bootstrap js-->
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<!--magnific popup js-->
+<script src="{{ url_for('static', filename='js/magnific-popup.js') }}"></script>
+<!--  costamizer option -->
+<script src="{{ url_for('static', filename='js/custamizer-option.js') }}"></script>
+<!--owl js-->
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<!-- script js-->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/testimonial.js') }}"></script>
+<script src="{{ url_for('static', filename='js/video-popup.js') }}"></script>
+
+</body>
+</html>
