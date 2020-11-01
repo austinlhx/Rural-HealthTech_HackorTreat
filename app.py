@@ -185,9 +185,12 @@ class LoginForm(FlaskForm):
     temperature = StringField('Temperature', [DataRequired()])
     fatigue = StringField('Fatigue (Yes, No)', [DataRequired()])
     sore_throat = StringField('Sore Throat (Yes, No)', [DataRequired()])
-    headache = StringField('Headache (Severe, Mild)', [DataRequired()])
+    headache = StringField('Headache (No headache, Severe, Mild)', [DataRequired()])
     eye_color = StringField('Eye Color (Normal, yellow)', [DataRequired()])
-    cough = StringField('Cough (Dry, others)', [DataRequired()])
+    cough = StringField('Cough (Dry, No Cough, others)', [DataRequired()])
+    chest_pain = StringField('Chest Pain (None, Rare, Frequent)', [DataRequired()])
+    loss_taste = StringField('Loss of Smell and Taste (No, Sometimes, Always)', [DataRequired()])
+    breathing = StringField('Difficulty Breathing (None, Moderate, High)', [DataRequired()])
     #Add more conditions
     submit = SubmitField('Submit')
 
@@ -207,13 +210,23 @@ def symptomForm():
         eye_color = form.eye_color.data
         headache = form.headache.data
         cough = form.cough.data
+        chest_pain = form.chest_pain.data
+        loss_taste = form.loss_taste.data
+        breathing = form.breathing.data
         #send data to the db
         #Apply ML model here
         #send back nearest doctors within a certain radius, 
         
-        disease = DiseaseClassifier( [  age, temperature, fatigue, sore_throat, eye_color, headache, cough  ]  )
-        disease_result = disease.predict(proba=False)
+        disease = DiseaseClassifier( [  age, temperature, fatigue, sore_throat, eye_color, breathing, loss_taste, chest_pain, headache, cough  ]  )
+        disease_probabilities = disease.predict(proba=True)
 
+        largest = float("-inf")
+        disease_result = ""
+        for res in disease_probabilities:
+            print(res[0])
+            print(res[1])
+            if res[0] > largest:
+                disease_result = res[1]
         
 
         
@@ -261,12 +274,11 @@ def symptomForm():
             elif duration > third_doctor[0]:
                 third_doctor = (duration, distance, doctor)
         
-        print(first_doctor)
-        print(second_doctor)
-        print(third_doctor)
+
         result = {
-            "Symptoms": [age, temperature, fatigue, sore_throat, eye_color, headache, cough], 
+            "Symptoms": [age, temperature, fatigue, sore_throat, eye_color, headache, cough, loss_taste, cough, breathing, chest_pain], 
             "Predicted Disease": disease_result, 
+            "Disease Breakdown": disease_probabilities,
             "Recommended Doctor": first_doctor,
             "Other Doctors Near You": second_doctor,
             "Another": third_doctor,

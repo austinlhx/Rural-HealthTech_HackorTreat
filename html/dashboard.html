@@ -138,6 +138,7 @@
                                                 {% for result in history %}
                                                 <div class="schedule-event">
                                                     <h5 class="names">Health Warrior Diagnosis: {{result['Predicted Disease']}}</h5>
+                                                    <h8>Disease Breakdown: {{result['Disease Breakdown']}}</h3>
                                                     
                                                     <p class="schedule-description" style = "color: #577689">The symptoms you indicated were <span style = "font-style: italic"> {{result['Symptoms']}}. </span></p>
                                                     <p class="schedule-description">The nearest doctor to you for your disease is <span style = "font-weight: bold">{{result['Recommended Doctor'][2]['doctors_name']}}, this doctor is {{result['Recommended Doctor'][1]}}km away from you. It will take about a {{result['Recommended Doctor'][0] | round(2)}}mins drive</span></p>
