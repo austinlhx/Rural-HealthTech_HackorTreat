@@ -211,8 +211,7 @@ def symptomForm():
         #send data to the db
         #Apply ML model here
         #send back nearest doctors within a certain radius, 
-        #user_ip = request.remote_addr
-        #ip_location = radar.geocode.ip(ip=user_ip)
+        
         disease = DiseaseClassifier( [  age, tempe, fatig, sore, eye, hache, cough  ]  )
         disease_result = disease.predict(proba=False)'''
 
@@ -221,17 +220,19 @@ def symptomForm():
         #TODO: Add disease result
         value = {"$push": {"history" : form.name.data}}
         user_database.update_one(query, value)
-        ip_location = ('40.7832', '73.9700')
+
+
+        #user_ip = request.remote_addr
+        #ip_location = radar.geocode.ip(ip=user_ip)
+        origin = (40.7832, -73.9700)
 
         all_doctors = doctor_database.find({})
         for doctor in all_doctors:
-            longitude = doctor['longitude']
-            latitude = doctor['latitude']
-            location = (latitude, longitude)
-            print(location)
+            longitude = float(doctor['longitude'])
+            latitude = float(doctor['latitude'])
+            destination = (latitude, longitude)
             #routes = radar.route.distance(origin=ip_location, destination=location, modes="foot", units="metric")
-            origin = (40.7041029, -73.98706)
-            destination = (40.7141029, -73.99706)
+            
             routes = radar.route.distance(origin, destination, modes="bike,foot")
             #radar.route.distance(origin=[lat,lng], destination=[lat,lng], modes=’car’, units=’metric’)
             print(routes.foot)
