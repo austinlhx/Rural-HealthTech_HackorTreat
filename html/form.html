@@ -35,68 +35,57 @@
    <div style = "background-image: url('https://repl.it/@catrazzy/HealthWarriorForm#bgdv2.jpg'); display: block; width: 75%; margin-left: 12.5%; margin-right: 12.5%; margin-top: 3%; border: 3px lightblue solid; padding: 2%; text-align: center; opacity: 0.8;">
       <img src = "scheck.jpg" style = "width: 60%">
 
-      <form> 
+      <form method="POST" action="/form"> 
 <div style = "background-color: #F3F7FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
         <br/>
-      <p style = "margin-top: 0; font-weight: bold; color: #4E6F89"> Age </p>
-
-      <input type="number" id="temp" name="temp" style = "width: 50px"><br/>
+        <div class="form-field">{{ form.age.label }} {{ form.age }}</div>
     <br/>
 
  </div>
 
-
+ 
 
 
         <div style = "background-color: #F7FDFF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: 0.5%"><br/>
-      <p style = "font-weight: bold; color: #84BDD1"> Fatigue </p>
-  
-      <table style = "margin: 0 auto; text-align: center">
-        <tr>
-        <td style = "width: 50%"><input type="radio">Yes</td>
-        <td style = "width: 50%"><input type="radio">No</td></tr>
-      </table><br/>
-    </div>
+            <br/>
+            <div class="form-field">{{ form.temperature.label }} {{ form.temperature }}</div>
+    
+        <br/>
+    
+     </div>
            
       <div style = "background-color: #F3F7FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
         <br/>
-      <p style = "margin-top: 0; font-weight: bold; color: #4E6089"> Temperature </p>
+        <div class="form-field">{{ form.fatigue.label }} {{ form.fatigue }}</div>
 
-      <input type="number" id="temp" name="temp" style = "width: 50px"><br/>
     <br/>
 
  </div>
            
       <div style = "background-color: #FAF9FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
         <br/>
-      <p style = "margin-top: 0; font-weight: bold; color: #B1A8DA"> Sore Throat </p>
-      <table style = "margin: 0 auto; text-align: center">
-        <tr>
-        <td style = "width: 50%"><input type="radio">Yes</td>
-        <td style = "width: 50%"><input type="radio">No</td></tr>
-      </table><br/>
-    </div>
+        <div class="form-field">{{ form.sore_throat.label }} {{ form.sore_throat }}</div>
+
+    <br/>
+
+ </div>
 
 
     <div style = "background-color: #FDFBFF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
         <br/>
-      <p style = "margin-top: 0; font-weight: bold; color: #C4A8DA"> Eye color </p>
-      <table style = "margin: 0 auto; text-align: center">
-        <tr>
-        <td style = "width: 50%"><input type="radio">Normal</td>
-        <td style = "width: 50%"><input type="radio">Yellow</td></tr>
-      </table><br/>
-    </div>
+        <div class="form-field">{{ form.eye_color.label }} {{ form.eye_color }}</div>
+
+    <br/>
+
+ </div>
 
 <div style = "background-color: #FEF7FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
-        <br/>
-      <p style = "margin-top: 0; font-weight: bold; color: #D3A8DA"> Cough </p>
-      <table style = "margin: 0 auto; text-align: center">
-        <tr>
-        <td style = "width: 50%"><input type="radio">Dry</td>
-        <td style = "width: 50%"><input type="radio">Other</td></tr>
-      </table><br/>
-    </div>
+    <br/>
+    <div class="form-field">{{ form.cough.label }} {{ form.cough }}</div>
+
+<br/>
+
+</div>
 <br/> <input type="submit" value="Submit">
       </form>
 <div class="spinner">

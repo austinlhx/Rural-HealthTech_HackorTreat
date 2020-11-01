@@ -1,6 +1,7 @@
 import json
 import os
 import pprint
+import datetime
 
 from pymongo import MongoClient
 from diseaseclf.diseaseclf import DiseaseClassifier
@@ -47,10 +48,6 @@ database_client = MongoClient("mongodb+srv://austinhx:helloworld@medicaldb.scqt4
 database = database_client.User
 user_database = database.user_info
 doctor_database = database.doctor_info
-
-
-
-#collection = database.test_collection
 
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
@@ -228,23 +225,54 @@ def symptomForm():
         #ip_location = radar.geocode.ip(ip=user_ip)
         origin = (40.7832, -73.9700)
 
-        all_doctors = doctor_database.find({})
+        all_doctors = {}
+
+        if disease_result == "Covid":
+            all_doctors = doctor_database.find({"doctors_profession": "Covid specialist"})
+        elif disease_result == "Cholera":
+            all_doctors = doctor_database.find({"doctors_profession": "Cholera specialist"})
+        elif disease_result == "Migrane":
+            all_doctors = doctor_database.find({"doctors_profession": "neurologist"})
+        elif disease_result == "Fever":
+            all_doctors = doctor_database.find({"doctors_profession": "General"})
+        
+        first_doctor = (float("-inf"), 0, 0)
+        second_doctor = (float("-inf"), 0, 0)
+        third_doctor = (float("-inf"), 0, 0)
+
+
         for doctor in all_doctors:
-            longitude = float(doctor['longitude'])
-            latitude = float(doctor['latitude'])
+            longitude = float(doctor['Longitude'])
+            latitude = float(doctor['Latitude'])
             destination = (latitude, longitude)
             #routes = radar.route.distance(origin=ip_location, destination=location, modes="foot", units="metric")
             
-            routes = radar.route.distance(origin, destination, modes="bike,foot")
+            routes = radar.route.distance(origin, destination, modes="car", units='metric')
             #radar.route.distance(origin=[lat,lng], destination=[lat,lng], modes=’car’, units=’metric’)
-            print(routes.foot)
+            duration = routes.car.duration.value
+            distance = routes.car.distance.value
+            if duration > first_doctor[0]:
+                third_doctor = second_doctor
+                second_doctor = first_doctor
+                first_doctor = (duration, distance, doctor)
+            elif duration > second_doctor[0]:
+                third_doctor = second_doctor
+                second_doctor = (duration, distance, doctor)
+            elif duration > third_doctor[0]:
+                third_doctor = (duration, distance, doctor)
         
+        print(first_doctor)
+        print(second_doctor)
+        print(third_doctor)
         result = {
             "Symptoms": [age, temperature, fatigue, sore_throat, eye_color, headache, cough], 
             "Predicted Disease": disease_result, 
-            "Recommended Doctor": "Bob Ross"
+            "Recommended Doctor": first_doctor,
+            "Other Doctors Near You": second_doctor,
+            "Another": third_doctor,
+            "Time": str(datetime.date.today())
             }
-            
+
         query = {"unique_id": current_user.id}
         value = {"$push": {"history" : result}}
         user_database.update_one(query, value)
