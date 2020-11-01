@@ -217,12 +217,11 @@ def symptomForm():
         disease = DiseaseClassifier( [  age, temperature, fatigue, sore_throat, eye_color, headache, cough  ]  )
         disease_result = disease.predict(proba=False)
 
-        query = {"unique_id": current_user.id}
+        
+
+        
         #this updates our history
-        #TODO: Add disease result
-        print(disease_result)
-        value = {"$push": {"history" : disease_result}}
-        user_database.update_one(query, value)
+        
 
 
         #user_ip = request.remote_addr
@@ -239,7 +238,16 @@ def symptomForm():
             routes = radar.route.distance(origin, destination, modes="bike,foot")
             #radar.route.distance(origin=[lat,lng], destination=[lat,lng], modes=’car’, units=’metric’)
             print(routes.foot)
-
+        
+        result = {
+            "Symptoms": [age, temperature, fatigue, sore_throat, eye_color, headache, cough], 
+            "Predicted Disease": disease_result, 
+            "Recommended Doctor": "Bob Ross"
+            }
+            
+        query = {"unique_id": current_user.id}
+        value = {"$push": {"history" : result}}
+        user_database.update_one(query, value)
 
         return redirect('/dashboard')
     

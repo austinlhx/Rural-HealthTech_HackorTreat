@@ -84,7 +84,6 @@
         <div class="row">
             <div class="col-12">
                 <h2 class="breadcrumb-text text-center">Hello {{user}}!</h2>
-                <h2 class="breadcrumb-text text-center">{{history}}</h2>
                 <h2 class="breadcrumb-text text-center">Your Dashboard</h2>
                 <p class="breadcrumb-text text-center" style = "font-size: large"> Find your medical history or search for a new diagnosis. </p>
             </div>
@@ -107,7 +106,7 @@
                             <p class="p-light about-para">
                                 To start a new search, select the button below and enter your symptom information. We will automatically enter your search into your medical log so you can go back and reference it at any time to track your history.
                             </p>
-                            <a class="btn btn-default btn-gradient text-white active" href="login.html">Start</a>
+                            <a class="btn btn-default btn-gradient text-white active" href="/form">Start</a>
                         </div>
                     </div>
                 </div>
@@ -136,13 +135,15 @@
                                     <div class=" cal-time events">
                                         <div class="row">
                                             <div class="col-md-10">
+                                                {% for result in history %}
                                                 <div class="schedule-event">
-                                                    <h5 class="names">Health Warrior Diagnosis: Common Cold</h5>
+                                                    <h5 class="names">Health Warrior Diagnosis: {{result['Predicted Disease']}}</h5>
                                                     
-                                                    <p class="schedule-description" style = "color: #577689">The symptoms you indicated were <span style = "font-style: italic"> runny nose, sneezing, phlegm, and headache. </span></p>
+                                                    <p class="schedule-description" style = "color: #577689">The symptoms you indicated were <span style = "font-style: italic"> {{result['Symptoms']}}. </span></p>
                                                     <p class="schedule-description"> This condition can be self-treated. </p> <p class="schedule-description">If you feel the need to visit a professional, we recommended <span style = "font-weight: bold">Bob Smith | General Practicioner </span></p>
                                                     <p class="schedule-description" style = "font-size: medium"> Oct. 30 </p>
                                                 </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
