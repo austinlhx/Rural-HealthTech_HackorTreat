@@ -1,109 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Unice" name="description">
-    <meta content="Unice" name="keywords">
-    <meta content="Unice" name="author">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Unice" name="description" />
+    <meta content="Unice" name="keywords" />
+    <meta content="Unice" name="author" />
 
     <title>Health Warrior</title>
 
     <!-- Fav icon -->
-    <link href="{{ url_for('static', filename='images/logo/favicon.png') }}" rel="shortcut icon">
+    <link
+      href="{{ url_for('static', filename='images/logo/favicon.png') }}"
+      rel="shortcut icon"
+    />
     <!-- Font Family-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
     <!--bootstrap css-->
-    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+    <link
+      href="{{ url_for('static', filename='css/bootstrap.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- color css -->
-    <link href="{{ url_for('static', filename='css/inner-page.css') }}" rel="stylesheet" type="text/css">
+    <link
+      href="{{ url_for('static', filename='css/inner-page.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!--owl carousel css-->
-    <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}" rel="stylesheet">
+    <link
+      href="{{ url_for('static', filename='css/owl.carousel.min.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}"
+      rel="stylesheet"
+    />
 
     <!-- Icons -->
-    <link href="{{ url_for('static', filename='css/fontawesome.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ url_for('static', filename='css/themify.css') }}" rel="stylesheet" type="text/css">
+    <link
+      href="{{ url_for('static', filename='css/fontawesome.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{{ url_for('static', filename='css/themify.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
 
     <!--magnific popup css-->
-    <link href="{{ url_for('static', filename='css/magnific-popup.css') }}" rel="stylesheet">
-</head>
-  <body style = "font-family: calibri">
-
-   <div style = "background-image: url('https://repl.it/@catrazzy/HealthWarriorForm#bgdv2.jpg'); display: block; width: 75%; margin-left: 12.5%; margin-right: 12.5%; margin-top: 3%; border: 3px lightblue solid; padding: 2%; text-align: center; opacity: 0.8;">
-      <img src = "scheck.jpg" style = "width: 60%">
-
-      <form method="POST" action="/form"> 
-<div style = "background-color: #F3F7FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
-        <br/>
-        <div class="form-field">{{ form.age.label }} {{ form.age }}</div>
-    <br/>
-
- </div>
-
- 
-
-
-        <div style = "background-color: #F7FDFF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: 0.5%"><br/>
-            <br/>
-            <div class="form-field">{{ form.temperature.label }} {{ form.temperature }}</div>
-    
-        <br/>
-    
-     </div>
-           
-      <div style = "background-color: #F3F7FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
-        <br/>
-        <div class="form-field">{{ form.fatigue.label }} {{ form.fatigue }}</div>
-
-    <br/>
-
- </div>
-           
-      <div style = "background-color: #FAF9FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
-        <br/>
-        <div class="form-field">{{ form.sore_throat.label }} {{ form.sore_throat }}</div>
-
-    <br/>
-
- </div>
-
-
-    <div style = "background-color: #FDFBFF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
-        <br/>
-        <div class="form-field">{{ form.eye_color.label }} {{ form.eye_color }}</div>
-
-    <br/>
-
- </div>
-
-<div style = "background-color: #FEF7FF; width: 60%; margin-left: 20%; margin-right: 20%; margin-top: .5%">
-    <br/>
-    <div class="form-field">{{ form.cough.label }} {{ form.cough }}</div>
-
-<br/>
-
-</div>
-<br/> <input type="submit" value="Submit">
-      </form>
-<div class="spinner">
-  <div class="bounce1"></div>
-  <div class="bounce2"></div>
-  <div class="bounce3"></div>
-</div>
+    <link
+      href="{{ url_for('static', filename='css/magnific-popup.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="agency" data-offset="50" data-spy="scroll" data-target=".navbar">
+<!--loader start-->
+<div class="loader-wrapper">
+    <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
-    
-<footer class="agency footer2 p-b-0" style = "width: 100%; margin-top: -3%; margin-bottom: -10%">
-
-    <p style = "color: white; text-align: center; margin-top: -2%"> Catherine, Harshita, Austin, & Shunya</p>
-
-</footer>   
-<!-- Tap on Top-->
-<div class="tap-top">
-    <div><i class="fa fa-angle-double-up"></i></div>
 </div>
-<!-- Tap on Ends-->
+<!--loader end-->
+
+<!--megamenu section Start-->
+<header class="dark loding-header custom-scroll">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                 <nav>
+                    <a class="logo-light m-r-auto" href="index.html"><img alt=""
+                                                                                  class="img-fluid" src="../assets/images/logo/hwarrior.JPG" style = "width: 13%; margin-top: 10px; margin-left: 2%; border-bottom: 3px #241E86 solid; border-top: 3px #241E86 solid"></a>
+                    <div class="responsive-btn">
+                        <a class="toggle-nav" href="#"><i aria-hidden="false" class="fa fa-bars text-white"></i></a>
+                    </div>
+                    
+                        <div class="responsive-btn"><h5 class="btn-back">back</h5></div>
+                        <ul class="main-menu">
+                            <li><a href="index.html">Home</a></li>
+                                          
+                            <li><a href="about-us.html">Dashboard </a></li>
+
+                            <li><a href="team.html">Team</a></li>
+
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="/logout">Log Out</a></li>
+                        </ul>
+                   
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+  <body style="font-family: calibri">
+    <div
+      style="
+        background-image: url('https://repl.it/@catrazzy/HealthWarriorForm#bgdv2.jpg');
+        display: block;
+        width: 75%;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+        margin-top: 3%;
+        border: 3px lightblue solid;
+        padding: 2%;
+        text-align: center;
+        opacity: 0.8;
+      "
+    >
+      <img src="scheck.jpg" style="width: 60%" />
+
+      <form method="POST" action="/form">
+        <div
+          style="
+            background-color: #f3f7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">{{ form.age.label }} {{ form.age }}</div>
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #f7fdff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <br />
+          <div class="form-field">
+            {{ form.temperature.label }} {{ form.temperature }}
+          </div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #f3f7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">
+            {{ form.fatigue.label }} {{ form.fatigue }}
+          </div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #faf9ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">
+            {{ form.sore_throat.label }} {{ form.sore_throat }}
+          </div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #fdfbff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">
+            {{ form.eye_color.label }} {{ form.eye_color }}
+          </div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #fef7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">{{ form.cough.label }} {{ form.cough }}</div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #fef7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">{{ form.cough.label }} {{ form.cough }}</div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #fef7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">{{ form.chest_pain.label }} {{ form.chest_pain }}</div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #fef7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">{{ form.loss_smell_taste.label }} {{ form.loss_smell_taste}}</div>
+
+          <br />
+        </div>
+
+        <div
+          style="
+            background-color: #fef7ff;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 0.5%;
+          "
+        >
+          <br />
+          <div class="form-field">{{ form.difficulty_breathing.label }} {{ form.difficulty_breathing }}</div>
+
+          <br />
+        </div>
+
+
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+      <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    
+
+    <footer
+      class="agency footer2 p-b-0"
+      style="width: 100%; margin-top: -3%; margin-bottom: -10%"
+    >
+      <p style="color: white; text-align: center; margin-top: -2%">
+        Catherine, Harshita, Austin, & Shunya
+      </p>
+    </footer>
+    
   </body>
 </html>
