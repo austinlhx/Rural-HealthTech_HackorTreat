@@ -184,7 +184,13 @@ def callback():
 
 
 class LoginForm(FlaskForm):
-    name = StringField('Name', [DataRequired()])
+    age = StringField('Age', [DataRequired()])
+    temperature = StringField('Temperature', [DataRequired()])
+    fatigue = StringField('Fatigue (Yes, No)', [DataRequired()])
+    sore_throat = StringField('Sore Throat (Yes, No)', [DataRequired()])
+    headache = StringField('Headache (Severe, Mild)', [DataRequired()])
+    eye_color = StringField('Eye Color (Normal, yellow)', [DataRequired()])
+    cough = StringField('Cough (Dry, others)', [DataRequired()])
     #Add more conditions
     submit = SubmitField('Submit')
 
@@ -196,29 +202,26 @@ def symptomForm():
     
     
     if request.method == 'POST' and form.submit():
-
-        print(form.name.data)
-        print(request.remote_addr)
-        print(current_user.id)
         
-        '''age = form.age.data
-        tempe = form.temperature.data
-        fatig = form.fatigue.data
-        sore = form.sore_throat.data
-        eye = form.eye_color.data
-        hache = form.headache.data
+        age = form.age.data
+        temperature = form.temperature.data
+        fatigue = form.fatigue.data
+        sore_throat = form.sore_throat.data
+        eye_color = form.eye_color.data
+        headache = form.headache.data
         cough = form.cough.data
         #send data to the db
         #Apply ML model here
         #send back nearest doctors within a certain radius, 
         
-        disease = DiseaseClassifier( [  age, tempe, fatig, sore, eye, hache, cough  ]  )
-        disease_result = disease.predict(proba=False)'''
+        disease = DiseaseClassifier( [  age, temperature, fatigue, sore_throat, eye_color, headache, cough  ]  )
+        disease_result = disease.predict(proba=False)
 
         query = {"unique_id": current_user.id}
         #this updates our history
         #TODO: Add disease result
-        value = {"$push": {"history" : form.name.data}}
+        print(disease_result)
+        value = {"$push": {"history" : disease_result}}
         user_database.update_one(query, value)
 
 

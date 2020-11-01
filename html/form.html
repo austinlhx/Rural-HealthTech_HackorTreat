@@ -1,7 +1,12 @@
 <div class="formwrapper">
     <h2 class="title">Contact</h2>
     <form method="POST" action="/form">
-        <div class="form-field">{{ form.name.label }} {{ form.name(size=20) }}</div>
+        <div class="form-field">{{ form.age.label }} {{ form.age }}</div>
+        <div class="form-field">{{ form.temperature.label }} {{ form.temperature }}</div>
+        <div class="form-field">{{ form.fatigue.label }} {{ form.fatigue }}</div>
+        <div class="form-field">{{ form.sore_throat.label }} {{ form.sore_throat }}</div>
+        <div class="form-field">{{ form.eye_color.label }} {{ form.eye_color }}</div>
+        <div class="form-field">{{ form.cough.label }} {{ form.cough }}</div>
         {{ form.submit }}
     </form>
   </div>
